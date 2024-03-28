@@ -81,8 +81,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-MONGO_CONNECTION_STRING = 'mongodb://10.109.2.63:443/'
-MONGO_DATABASE_NAME = 'classroom_reservation_control'
+MONGO_CONNECTION_STRING = 'mongodb://localhost:27017/'
+MONGO_DATABASE_NAME = 'classroom'
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
