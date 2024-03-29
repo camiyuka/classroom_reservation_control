@@ -50,5 +50,3 @@ class ClassroomRepository:
     def delete(self, document_id) -> None:
         self.__get_collection().delete_one({"_id": ObjectId(document_id)})
  
-    def deleteAll(self) -> None:
-        self.__get_collection().delete_many({})
