@@ -1,6 +1,5 @@
 
 class Classroom:
-
     def __init__(self, name='', is_available='', capacity='', number='', location='', available_periods='') -> None:
         self.name= name
         self.capacity= capacity
