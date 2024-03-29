@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastre-se</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'api/style.css' %}" />
+  </head>
+  <body>
+    <div class="login_wrapper">
+      <h2>Adicionar nova previsão</h2>
+      <form
+        id="new_forecast"
+        action="{% url 'update_classroom' document_id=document_id  %}"
+        method="post"
+      >
+        {% csrf_token %} {% for field in form %}
+        <div class="input_wrapper">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+        </div>
+        {% endfor %}
+
+        <div class="input_wrapper">
+          <button type="submit">Cadastrar</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

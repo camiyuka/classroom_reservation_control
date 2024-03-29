@@ -7,8 +7,8 @@ from .forms import ClassroomForm
 # Create your views here.
 class ClassroomInsert(View):
     def get(self, request):
-        weather_form = ClassroomForm()
-        return render(request, "index.html", { "form": weather_form})
+        classroom_form = ClassroomForm()
+        return render(request, "index.html", { "form": classroom_form})
      
     def post(self, request):
         classroom_form = ClassroomForm(request.POST)
@@ -21,7 +21,7 @@ class ClassroomInsert(View):
             else:
                 return render(request, "classrooms.html", {"error" : serializer.errors})
         else: 
-            return render(request, "classrooms.htmll", {"error" : classroom_form.errors})
+            return render(request, "classrooms.html", {"error" : classroom_form.errors})
         
 class ClassroomView(View):
     def get(self, request):
@@ -61,3 +61,24 @@ class ClassroomView(View):
         return render(request, "classrooms.html")
     
     
+    
+        
+class ClassroomUpdate(View):
+    def get(self, request, document_id):
+        classroom_form = ClassroomForm()
+        return render(request, "update.html", { "form": classroom_form, "document_id": document_id})
+
+    
+    def post(self, request, document_id):
+        classroom_form = ClassroomForm(request.POST)
+        if classroom_form.is_valid():
+            serializer = ClassroomSerializer(data=classroom_form.data)
+            if serializer.is_valid():
+                repository = ClassroomRepository('classroom_reservations_ACL')
+                print(document_id)
+                repository.update(document_id, serializer.data)
+                return render(request, "classrooms.html", {"classrooms": [serializer.data]})
+            else:
+                return render(request, "classrooms.html", {"error" : serializer.errors})
+        else: 
+            return render(request, "classrooms.html", {"error" : classroom_form.errors})
