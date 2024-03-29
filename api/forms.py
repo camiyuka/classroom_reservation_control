@@ -5,4 +5,3 @@ class ClassroomForm(forms.Form):
     capacity = forms.CharField()
     number = forms.IntegerField(required=False)
     location = forms.CharField(required=False)
-    available_periods = forms.ListField(required=False)
