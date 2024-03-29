@@ -8,7 +8,7 @@ from .forms import ClassroomForm
 class ClassroomInsert(View):
     def get(self, request):
         classroom_form = ClassroomForm()
-        return render(request, "index.html", { "form": classroom_form})
+        return render(request, "post_classroom.html", { "form": classroom_form})
      
     def post(self, request):
         classroom_form = ClassroomForm(request.POST)
@@ -60,9 +60,7 @@ class ClassroomView(View):
         repository.delete(document_id)
         return render(request, "classrooms.html")
     
-    
-    
-        
+           
 class ClassroomUpdate(View):
     def get(self, request, document_id):
         classroom_form = ClassroomForm()
