@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Sala de Aula</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'api/style.css' %}" />
+</head>
+<body>
+    <header>
+        <h1>Editar Sala de Aula</h1>
+    </header>
+
+    <div class="editar-sala">
+        <form
+            id="new_classroom"
+            action="{% url 'update_classroom' document_id=document_id  %}"
+            method="post"
+        >
+            {% csrf_token %} {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+            </div>
+            {% endfor %}
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+</body>
+</html>

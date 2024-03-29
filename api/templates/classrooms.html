@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Endpoint: /api/salas/</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'api/style.css' %}" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Salas Disponíveis</h1>
+    </header>
+
+    <div class="salas-disponiveis">
+      {% if error%}
+      <div>{{error}}</div>
+      {% endif %}
+
+      <h2>Salas Disponíveis:</h2>
+      <ul>
+        {% for classroom in classrooms %}
+
+        <li>
+          <span>{{ classroom.name }}</span>
+          <button>
+            <a href="detalhes.html">Ver Detalher</a>
+          </button>
+          <button>
+            <a href="">Excluir</a>
+          </button>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
