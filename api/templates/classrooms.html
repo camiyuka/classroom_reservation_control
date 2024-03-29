@@ -6,21 +6,20 @@
     <title>Document</title>
   </head>
   <body>
-
     <div>
 
-        {% if error%}
-        <div>{{error}}</div>
-        {% endif %}
-  
-        <div class="forecast_list">
-          {% for classroom in classroooms %}
-          <div class="classroom_forecast">
-            {{ classroom }}
-          </div>
-          {% endfor %}
+      {% if error%}
+      <div>{{error}}</div>
+      {% endif %}
+
+      <div class="forecast_list">
+        {% for classroom in classrooms %}
+        <div class="classroom_forecast">
+          {{ classroom }}
+        </div>
+        {% endfor %}
+
 
     </div>
-
   </body>
 </html>
