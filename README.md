@@ -9,7 +9,7 @@ Atividade Avaliativa do dia 28/03 com objetivo de fazer uma API de Controle e Re
 - **classrooms/classroom/<document_id>/update/**  : atualizar determinado registro
 - **classrooms/classroom/<document_id>/delete/**  : deletar determinado registro de sala de aula
 
-## Contribuintes: 
+## Contribuintes:
 - Ana Júlia Moura Martins 
 - Camila Yatabe
 - Letícia Matos
