@@ -4,7 +4,7 @@ from .views import ClassroomInsert, ClassRoomView
 
 urlpatterns = [
     path('classrooms/', ClassRoomView.as_view(), name='classrooms'),
-    # path('classrooms/classroom/<int:class_id>/', admin.site.urls, name='classroom'),
+    path('classrooms/classroom/<str:document_id>/', ClassRoomView.getById, name='classroom'),
     path('classrooms/classroom/post/', ClassroomInsert.as_view(), name='post_classroom'),
     # path('classrooms/classroom/<int:class_id>/update/', admin.site.urls, name='update_classroom'),
     # path('classrooms/classroom/<int:class_id>/delete/', admin.site.urls, name='delete_classroom'),

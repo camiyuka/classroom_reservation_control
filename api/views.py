@@ -31,6 +31,21 @@ class ClassRoomView(View):
             serializer = ClassroomSerializer(data=documents, many=True)
             if serializer.is_valid():
                 classrooms = serializer.save()
+                return render(request, "classrooms.html", {"classrooms": classrooms})
+            else: 
+                return render(request, "classrooms.html", {"error" : serializer.errors})
+        except ValueError as e:
+            return render(request, "classrooms.html", {"error" : e})
+        except Exception as e:
+            return render(request, "classrooms.html", {"error" : e})
+    
+    def getById(request, document_id):
+        try:
+            repository = ClassroomRepository('classroom_reservations_ACL')
+            documents = list(repository.getById(document_id))
+            serializer = ClassroomSerializer(data=documents, many=True)
+            if serializer.is_valid():
+                classrooms = serializer.save()
                 print(classrooms)
                 return render(request, "classrooms.html", {"classrooms": classrooms})
             else: 
