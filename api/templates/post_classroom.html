@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Criar Sala de Aula</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'api/style.css' %}" />
+  </head>
+  <body>
+    <header>
+      <h1>Criar Sala de Aula</h1>
+    </header>
+
+    <div class="criar-sala">
+      <form id="new_forecast" action="{% url 'post_classroom' %}" method="post">
+        {% csrf_token %} {% for field in form %}
+        <div class="form-group">
+          <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+          {{ field }}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Criar Sala</button>
+      </form>
+    </div>
+  </body>
+</html>
