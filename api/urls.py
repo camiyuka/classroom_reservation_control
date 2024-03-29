@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import ClassroomInsert
+from .views import ClassroomInsert, ClassRoomView
 
 urlpatterns = [
-    # path('classrooms/', admin.site.urls, name='classrooms'),
+    path('classrooms/', ClassRoomView.as_view(), name='classrooms'),
     # path('classrooms/classroom/<int:class_id>/', admin.site.urls, name='classroom'),
     path('classrooms/classroom/post/', ClassroomInsert.as_view(), name='post_classroom'),
     # path('classrooms/classroom/<int:class_id>/update/', admin.site.urls, name='update_classroom'),
