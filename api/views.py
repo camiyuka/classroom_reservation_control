@@ -23,7 +23,7 @@ class ClassroomInsert(View):
         else: 
             return render(request, "classrooms.htmll", {"error" : classroom_form.errors})
         
-class ClassRoomView(View):
+class ClassroomView(View):
     def get(self, request):
         try:
             repository = ClassroomRepository('classroom_reservations_ACL')
@@ -54,3 +54,10 @@ class ClassRoomView(View):
             return render(request, "classrooms.html", {"error" : e})
         except Exception as e:
             return render(request, "classrooms.html", {"error" : e})
+
+    def deleteById(request, document_id):
+        repository = ClassroomRepository('classroom_reservations_ACL')
+        repository.delete(document_id)
+        return render(request, "classrooms.html")
+    
+    
