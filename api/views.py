@@ -22,3 +22,20 @@ class ClassroomInsert(View):
                 return render(request, "classrooms.html", {"error" : serializer.errors})
         else: 
             return render(request, "classrooms.htmll", {"error" : classroom_form.errors})
+        
+class ClassRoomView(View):
+    def get(self, request):
+        try:
+            repository = ClassroomRepository('classroom_reservations_ACL')
+            documents = list(repository.list()) 
+            serializer = ClassroomSerializer(data=documents, many=True)
+            if serializer.is_valid():
+                classrooms = serializer.save()
+                print(classrooms)
+                return render(request, "classrooms.html", {"classrooms": classrooms})
+            else: 
+                return render(request, "classrooms.html", {"error" : serializer.errors})
+        except ValueError as e:
+            return render(request, "classrooms.html", {"error" : e})
+        except Exception as e:
+            return render(request, "classrooms.html", {"error" : e})
