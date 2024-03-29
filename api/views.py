@@ -2,7 +2,9 @@ from django.shortcuts import render
 from rest_framework.views import View
 from .serializers import ClassroomSerializer
 from .repository import ClassroomRepository
-from .forms import ClassroomForm
+from .forms import ClassroomForm, ClassroomReservationForm
+from .models import Classroom
+from rest_framework import status
 
 # Create your views here.
 class ClassroomInsert(View):
@@ -54,3 +56,40 @@ class ClassRoomView(View):
             return render(request, "classrooms.html", {"error" : e})
         except Exception as e:
             return render(request, "classrooms.html", {"error" : e})
+
+class ClassroomReservation(View):   
+    def get(self, request):
+        form = ClassroomReservationForm()
+        return render(request, "reservation.html", { "form": form})
+     
+    def post(self, request):
+        form = ClassroomReservationForm(request.POST)
+        if form.is_valid():
+            serializer = ClassroomSerializer(data=form.cleaned_data)
+            if serializer.is_valid():
+                repository = ClassroomRepository('classroom_reservation_ACL')
+                repository.insert(serializer.data)
+                return render(request, "reservation.html", {"success": True})
+            else:
+                return render(request, "reservation.html", {"error": serializer.errors})
+        else: 
+            return render(request, "reservation.html", {"error": form.errors})
+        
+    def getReservationById(request, document_id):
+        try:
+            repository = ClassroomRepository('classroom_reservation_ACL')
+            documents = list(repository.getById(document_id))
+            serializer = ClassroomSerializer(data=documents, many=True)
+            if serializer.is_valid():
+                classrooms = serializer.save()
+                print(classrooms)
+                return render(request, "reservation.html", {"classrooms": classrooms})
+            else: 
+                return render(request, "reservation.html", {"error" : serializer.errors})
+        except ValueError as e:
+            return render(request, "reservation.html", {"error" : e})
+        except Exception as e:
+            return render(request, "reservation.html", {"error" : e})
+
+
+
