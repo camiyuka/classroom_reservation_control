@@ -1,10 +1,8 @@
 from rest_framework import serializers
-from .models import Classroom
 
-class ClassroomSerializer(serializer.Serializers):
+class ClassroomSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=100)
-    is_available = serializers.BooleanField()
     capacity = serializers.IntegerField()
-    number = serializers.IntegerField(max_length=100)
+    number = serializers.IntegerField()
     location = serializers.CharField(max_length=100)
-    available_periods = serializers.ListField()
+    available_periods = serializers.ListField(required=False)
